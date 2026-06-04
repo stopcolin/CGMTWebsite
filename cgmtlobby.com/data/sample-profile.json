@@ -1,0 +1,40 @@
+{
+  "success": true,
+  "staticFallback": true,
+  "player": {
+    "name": "Example Player",
+    "steamid": "STEAM_0:0:00000000",
+    "is_online": false,
+    "steam_avatar": "",
+    "money": 123456,
+    "time": 432000,
+    "last_online": 1760000000,
+    "current_hat": "No Hat",
+    "tetris_score": 0,
+    "tetris_rank": null,
+    "current_ball": "Default",
+    "chips": 5000,
+    "max_items": 64,
+    "bank_limit": 64
+  },
+  "inventory": [
+    {
+      "slot": 1,
+      "item_name": "Sample Hat",
+      "item_price": 1000,
+      "item_image": ""
+    },
+    {
+      "slot": 2,
+      "item_name": "Sample Particle",
+      "item_price": 10000,
+      "item_image": ""
+    }
+  ],
+  "vault": [],
+  "net_worth": {
+    "store_value": 11000,
+    "resell_value": 5500
+  }
+}
+
