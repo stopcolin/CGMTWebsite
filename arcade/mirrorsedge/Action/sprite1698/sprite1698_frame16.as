@@ -1,0 +1,54 @@
+ï»¿// Action script...
+
+// [Action in Frame 16]
+function  ()
+{
+    \x01 = 2578 + 1822;
+    return (eval("\x01") + true);
+} // End of the function
+var \x10!2 = \x10 ();
+if (eval("\x10!2") == 23689)
+{
+} // end if
+if (eval("\x10!2") == 4401)
+{
+} // end if
+if (eval("\x10!2") == 27377)
+{
+} // end if
+if (eval("\x10!2") == 33566)
+{
+} // end if
+if (eval("\x10!2") == 329)
+{
+} // end if
+if (eval("\x10!2") == 59130)
+{
+} // end if
+setProperty("Âæ", _xscale, 100);
+if (eval("\x07") > 0)
+{
+    ÎÏ = 13;
+}
+else if (eval("\x07") < 0)
+{
+    ÎÏ = 35;
+} // end else if
+\x07 = 0;
+r> = function ()
+{
+    if (getProperty("Âæ", _x) < _root.UL[NULL + UL].UL)
+    {
+        setProperty("Âæ", _x, getProperty("Âæ", _x) + 4);
+        UL(true, false);
+    } // end if
+    if (getProperty("Âæ", _x) > _root.UL[NULL + UL].UL)
+    {
+        setProperty("Âæ", _x, getProperty("Âæ", _x) - 4);
+        UL(true, false);
+    } // end if
+    if (UL.UL(getProperty("Âæ", _x) - UL[NULL + UL].UL) < 4)
+    {
+        setProperty("Âæ", _x, UL[NULL + UL].UL);
+    } // end if
+};

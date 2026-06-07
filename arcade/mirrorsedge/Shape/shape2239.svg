@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1"
+xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:author="http://www.sothink.com"
+width="122px" height="5px"
+xml:space="preserve">
+<g id="1765" transform="matrix(1, 0, 0, 1, -5798.05, -3805.8)">
+<linearGradient
+id="LinearGradID_1281" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-0.000762939, 0.146912, -0.538193, -0.00282288, 6099.9, 3718.55)" spreadMethod ="pad" x1="-819.2" y1="0" x2="819.2" y2="0" >
+<stop  offset="0" style="stop-color:#A3A0A0;stop-opacity:1" />
+<stop  offset="1" style="stop-color:#6A6E6E;stop-opacity:1" />
+</linearGradient>
+<path style="fill:url(#LinearGradID_1281) " d="M5919.6,3810.75L5798.05 3810.75L5798.05 3808.55L5919.6 3808.55L5919.6 3810.75" />
+<linearGradient
+id="LinearGradID_1282" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-0.000762939, 0.146912, -0.538193, -0.00282288, 6099.9, 3718.55)" spreadMethod ="pad" x1="-819.2" y1="0" x2="819.2" y2="0" >
+<stop  offset="0" style="stop-color:#A3A0A0;stop-opacity:1" />
+<stop  offset="1" style="stop-color:#6A6E6E;stop-opacity:1" />
+</linearGradient>
+<path style="fill:url(#LinearGradID_1282) " d="M5919.6,3808.55L5798.05 3808.55L5798.05 3805.8L5919.6 3805.8L5919.6 3808.55" />
+</g>
+</svg>

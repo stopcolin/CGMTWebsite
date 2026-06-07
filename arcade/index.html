@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>CGMT Arcade</title>
-	<link rel="stylesheet" href="arcade.css">
+	<link rel="stylesheet" href="arcade.css?v=5">
 	<script>
 		window.RufflePlayer = window.RufflePlayer || {};
 		window.RufflePlayer.config = {
@@ -21,13 +21,13 @@
 			quality: "high"
 		};
 	</script>
-	<script src="games.js"></script>
+	<script src="games.js?v=5"></script>
 	<script src="ruffle/ruffle.js"></script>
 </head>
 <body>
 	<main id="player-host" aria-label="Arcade game"></main>
 
-	<div id="audio-controls" class="audio-controls">
+	<div id="audio-controls" class="audio-controls" style="position:fixed;top:12px;right:12px;z-index:2147483647;">
 		<button id="audio-toggle" type="button" aria-expanded="false">Audio</button>
 		<div id="audio-panel" class="audio-panel" hidden>
 			<label for="volume-slider">Volume <span id="volume-label">100%</span></label>
@@ -138,7 +138,7 @@
 			}
 
 			function startGame(game) {
-				var swfPath = "games/" + game.file;
+				var swfPath = game.path || ("games/" + game.file);
 
 				fetch(swfPath, { method: "HEAD", cache: "no-store" }).then(function (response) {
 					if (!response.ok) {
@@ -153,14 +153,33 @@
 					applyVolume();
 					document.title = game.name + " - CGMT Arcade";
 
-					return player.ruffle().load({
+					function sizePlayer() {
+						var width = Math.max(1, host.clientWidth || window.innerWidth);
+						var height = Math.max(1, host.clientHeight || window.innerHeight);
+
+						player.setAttribute("width", String(width));
+						player.setAttribute("height", String(height));
+						player.style.width = width + "px";
+						player.style.height = height + "px";
+					}
+
+					sizePlayer();
+					window.addEventListener("resize", sizePlayer);
+
+					var loadOptions = {
 						url: swfPath,
 						autoplay: "on",
 						allowScriptAccess: false,
 						scale: "showAll",
 						forceScale: true,
 						forceAlign: true
-					});
+					};
+
+					if (game.base) {
+						loadOptions.base = game.base;
+					}
+
+					return player.ruffle().load(loadOptions);
 				}).then(function () {
 					applyVolume();
 					message.hidden = true;

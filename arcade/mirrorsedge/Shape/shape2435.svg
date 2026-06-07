@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1"
+xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:author="http://www.sothink.com"
+width="188px" height="266px"
+xml:space="preserve">
+<g id="1865" transform="matrix(1, 0, 0, 1, 8.95, 0)">
+<linearGradient
+id="LinearGradID_1363" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-0.00254822, -0.188522, 0.0704651, -0.000961304, 55.3, 73.2)" spreadMethod ="pad" x1="-819.2" y1="0" x2="819.2" y2="0" >
+<stop  offset="0" style="stop-color:#21281C;stop-opacity:1" />
+<stop  offset="0.176471" style="stop-color:#313E28;stop-opacity:1" />
+<stop  offset="0.470588" style="stop-color:#465739;stop-opacity:1" />
+</linearGradient>
+<path style="fill:url(#LinearGradID_1363) " d="M112.3,250.7L0 250.7L0 19.6L112.3 19.6L112.3 250.7" />
+<linearGradient
+id="LinearGradID_1364" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.0130768, -0.21344, 0.050354, 0.00308228, 152.4, 20.95)" spreadMethod ="pad" x1="-819.2" y1="0" x2="819.2" y2="0" >
+<stop  offset="0" style="stop-color:#21281C;stop-opacity:1" />
+<stop  offset="0.176471" style="stop-color:#313E28;stop-opacity:1" />
+<stop  offset="0.470588" style="stop-color:#465739;stop-opacity:1" />
+</linearGradient>
+<path style="fill:url(#LinearGradID_1364) " d="M112.3,19.6L112.3 0L178.8 0L178.8 265.95L112.3 265.95L112.3 250.7L112.3 19.6" />
+<linearGradient
+id="LinearGradID_1365" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0, 0.0543518, -0.0383606, -0.000137329, 145.4, 53.1)" spreadMethod ="pad" x1="-819.2" y1="0" x2="819.2" y2="0" >
+<stop  offset="0" style="stop-color:#66A056;stop-opacity:0.6" />
+<stop  offset="0.470588" style="stop-color:#498C37;stop-opacity:0" />
+</linearGradient>
+<path style="fill:url(#LinearGradID_1365) " d="M177.5,104.05L114 84.9L114 1.25L176.85 1.5L177.5 104.05" />
+<linearGradient
+id="LinearGradID_1366" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0, 0.0350494, -0.0738525, 0, 51.55, 54.4)" spreadMethod ="pad" x1="-819.2" y1="0" x2="819.2" y2="0" >
+<stop  offset="0" style="stop-color:#66A056;stop-opacity:0.6" />
+<stop  offset="0.470588" style="stop-color:#498C37;stop-opacity:0" />
+</linearGradient>
+<path style="fill:url(#LinearGradID_1366) " d="M113.3,87.2L-8.95 75L-8.95 21.1L112.05 21.1L113.3 87.2" />
+</g>
+</svg>

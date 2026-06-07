@@ -143,7 +143,7 @@
 
       var badge = document.createElement("span");
       badge.className = "cgmt-private-badge";
-      badge.textContent = "Private";
+      badge.textContent = "WIP";
       headerBrand.appendChild(badge);
     }
 

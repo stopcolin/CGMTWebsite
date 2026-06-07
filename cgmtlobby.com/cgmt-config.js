@@ -10,7 +10,7 @@
   workshopUrl: "",
 
   assets: {
-    background: "images/gmt_lobby2_r8.jpg",
+    background: "images/gmt_build0s4b.jpg",
     logoBackground: "celestiallogo.png",
     logoOutline: "logo_outline.png",
     favicon: "celestialicon.ico"
@@ -32,17 +32,17 @@
   features: [
     {
       title: "New: Slashers",
-      description: "A tense horror rotation where survivors search, repair, and run while the killer closes in.",
+      description: "Classic horror movie experience.",
       image: "images/gamemodes/slashers_logo.png"
     },
     {
       title: "New: Prop Hunt",
-      description: "Hide in plain sight as a prop or sweep the map as a hunter before time runs out.",
+      description: "Become a prop, make a profit, or kill some props, make a profit.",
       image: "images/gamemodes/prophunt_logo.png"
     },
     {
       title: "New: Jazztronauts",
-      description: "Hop on the trolley, raid strange maps for props and shards, then cash out back at the bar.",
+      description: "Steal them props, make a profit.",
       image: "images/gamemodes/jazztronauts_logo.png"
     }
   ],
@@ -60,13 +60,13 @@
       ]
     },
     {
-      title: "Slashers, Prop Hunt, and Jazztronauts are joining the lineup",
-      author: "CGMT Staff",
+      title: "Slashers, Prop Hunt, and Jazztronauts WIP",
+      author: "",
       date: "2026-06-03",
-      summary: "The gamemode page now highlights the custom modes being brought into the Tower.",
+      summary: "WIP",
       body: [
-        "The gamemode section has been updated with pages for Slashers, Prop Hunt, and Jazztronauts.",
-        "Each page is written for players who already know GMod but may not know what makes the Tower version special: cosmetics, payouts, achievements, and the lobby connection all matter here."
+        "",
+        ""
       ]
     }
   ],
@@ -93,7 +93,7 @@
         {
           title: "Discord",
           items: [
-            "Added Discord Bot."
+            "WIP"
           ]
         }
       ]
@@ -149,15 +149,13 @@
         {
           title: "Overview",
           body: [
-            "Players move through the map while the chimera hunts. Surviving is about awareness, routes, and staying calm when the chase starts.",
-            "The mode has always been one of the stranger Tower classics, which is exactly why it belongs in the list."
+            "WIP",
           ]
         },
         {
           title: "Good To Know",
           body: [
-            "Keep moving, watch corners, and do not assume another player is going to save you.",
-            "Noise and hesitation are usually what turn a close escape into a very short one."
+            "WIP"
           ]
         }
       ]
@@ -205,7 +203,7 @@
       logo: "images/gamemodes/slashers_logo.png",
       accent: "#b43a3a",
       tagline: "A horror round where one killer hunts a team of survivors.",
-      description: "Slashers is built around pressure. Survivors need to explore the map, keep calm, and finish objectives while the killer tries to split the group and pick people off. It is slower and moodier than most Tower games, but the round can turn fast once the chase starts.",
+      description: "WIP",
       menu: [
         { title: "Overview", slug: "overview" },
         { title: "Maps", slug: "maps" },
