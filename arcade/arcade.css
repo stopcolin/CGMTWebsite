@@ -25,16 +25,21 @@ body {
 }
 
 #player-host {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	position: fixed;
+	inset: 0;
+	display: block;
 	background: #000;
 }
 
-ruffle-player {
+ruffle-player,
+#ruffle-player {
+	position: absolute !important;
+	inset: 0 !important;
 	display: block;
-	width: 100%;
-	height: 100%;
+	width: 100% !important;
+	height: 100% !important;
+	max-width: none !important;
+	max-height: none !important;
 }
 
 .audio-controls {

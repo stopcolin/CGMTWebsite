@@ -1,4 +1,4 @@
-﻿window.CGMT_SITE_CONFIG = {
+window.CGMT_SITE_CONFIG = {
   siteName: "Celestials GMod Tower",
   shortName: "CGMT",
   domain: "stopcolin.github.io/CGMTWebsite/cgmtlobby.com",
@@ -202,97 +202,25 @@
       image: "images/gamemodes/slashers_off.jpg",
       logo: "images/gamemodes/slashers_logo.png",
       accent: "#b43a3a",
-      tagline: "A horror round where one killer hunts a team of survivors.",
-      description: "WIP",
+      tagline: "One slasher hunts a group of survivors.",
+      description: "Slashers is an asymmetrical horror gamemode where one player hunts the survivors.",
       menu: [
         { title: "Overview", slug: "overview" },
-        { title: "Maps", slug: "maps" },
-        { title: "Roles", slug: "roles" },
-        { title: "Milestones", slug: "milestones" },
-        { title: "GMC Payout", slug: "gmc-payout" }
+        { title: "Gameplay", slug: "gameplay" }
       ],
       pages: {
         overview: {
-          title: "SURVIVE THE NIGHT",
+          title: "SLASHERS",
           body: [
-            "Slashers is an asymmetrical horror gamemode where one killer hunts a group of survivors across dark maps full of objectives, hiding spots, and bad decisions waiting to happen.",
-            "Survivors win by working through the map objective and escaping before time runs out. The slasher wins by breaking the group apart and making sure nobody gets out clean.",
-            "The CGMT version keeps the intended Slashers flow while tying it into Tower systems like the scoreboard, achievements, GMC payout, and lobby return."
-          ],
-          info: [
-            "Players: 2 or more",
-            "Style: Asymmetrical horror",
-            "Match Flow: 5 rounds",
-            "Teams: Survivors and Slasher"
+            "One player becomes the slasher while the remaining players become survivors.",
+            "The survivors must complete the map objective and escape before the slasher kills them."
           ]
         },
-        maps: {
-          title: "MAPS",
+        gameplay: {
+          title: "GAMEPLAY",
           body: [
-            "Slashers maps are built around routes, darkness, and pressure. Survivors need time to search and solve objectives, while the slasher needs to control the parts of the map everyone eventually has to cross."
-          ],
-          sections: [
-            {
-              title: "Active Maps",
-              body: [
-                "Highschool, Lodge, Motel, Selvage, Subway, and Summercamp are set up for the Tower rotation.",
-                "Each map keeps its own objective pacing, so learning the exits and generator spots matters more than trying to sprint everywhere."
-              ]
-            }
-          ]
-        },
-        roles: {
-          title: "ROLES",
-          body: [
-            "Every round has a different rhythm depending on who becomes the slasher and which survivors make it through the first few minutes."
-          ],
-          sections: [
-            {
-              title: "Survivors",
-              body: [
-                "Survivors use their CGMT playermodels and cosmetics. Their job is to search, coordinate, complete the map objective, and escape.",
-                "The safest survivor is not always the fastest one. Staying calm and moving with purpose usually beats sprinting into the dark alone."
-              ]
-            },
-            {
-              title: "Slashers",
-              body: [
-                "Slashers use the original horror models for readability and mood.",
-                "A good slasher pressures objectives, listens for mistakes, and forces survivors to split up before finishing them off."
-              ]
-            }
-          ]
-        },
-        milestones: {
-          title: "MILESTONES",
-          body: [
-            "Slashers milestones reward the long grind: surviving, hunting, and learning how each map wants to be played.",
-            "Milestone rewards are private Tower inventory items earned through achievements instead of store purchases."
-          ],
-          sections: [
-            {
-              title: "Rewards",
-              body: [
-                "Ghostface is tied to the Slashers milestone track.",
-                "More rewards can be added as the mode gets played and the achievement pacing settles."
-              ]
-            }
-          ]
-        },
-        "gmc-payout": {
-          title: "GMC PAYOUT",
-          body: [
-            "Slashers pays GMC for playing through rounds and performing well, then gives the normal Tower thanks-for-playing payout at the end of the match set.",
-            "Survivors are rewarded for escaping and staying alive. Slashers are rewarded for kills and round pressure."
-          ],
-          sections: [
-            {
-              title: "Payout Notes",
-              body: [
-                "Payout is handled by the gamemode integration, not by the website.",
-                "Values can be adjusted in the server code if the mode starts paying too quickly or too slowly."
-              ]
-            }
+            "Survivors search the map, work together, and try to escape.",
+            "The slasher hunts the survivors and tries to stop them."
           ]
         }
       }
@@ -303,97 +231,25 @@
       image: "images/gamemodes/prophunt_off.jpg",
       logo: "images/gamemodes/prophunt_logo.png",
       accent: "#48a35f",
-      tagline: "Hide as a prop or hunt down the room that looks just a little too suspicious.",
-      description: "Prop Hunt is simple in the best way: props blend into the map, hunters try to find them, and every tiny movement feels like a bad idea. The Tower version keeps playermodels and cosmetics where they make sense, then hides them once a player becomes a prop.",
+      tagline: "Props hide and hunters search for them.",
+      description: "Prop Hunt is a hide-and-seek gamemode where props disguise themselves as objects.",
       menu: [
         { title: "Overview", slug: "overview" },
-        { title: "Maps", slug: "maps" },
-        { title: "Teams", slug: "teams" },
-        { title: "Milestones", slug: "milestones" },
-        { title: "GMC Payout", slug: "gmc-payout" }
+        { title: "Gameplay", slug: "gameplay" }
       ],
       pages: {
         overview: {
-          title: "HIDE IN PLAIN SIGHT",
+          title: "PROP HUNT",
           body: [
-            "Prop Hunt is a hide-and-seek gamemode where props disguise as objects and hunters try to spot what does not belong.",
-            "The fun is in the small panic: one bad wiggle, one strange chair, one hunter staring a little too long at the corner you thought was perfect.",
-            "The CGMT version keeps the Tower scoreboard, achievements, GMC payout, lobby return, and cosmetics where they make sense."
-          ],
-          info: [
-            "Players: 2 or more",
-            "Style: Hide and seek",
-            "Teams: Props and Hunters",
-            "Goal: Props survive, Hunters find them"
+            "Props disguise themselves as objects found around the map.",
+            "Hunters search for and eliminate the props before time runs out."
           ]
         },
-        maps: {
-          title: "MAPS",
+        gameplay: {
+          title: "GAMEPLAY",
           body: [
-            "Prop Hunt maps work best when they have clutter, readable rooms, and enough weird little hiding spots to make hunters doubt themselves."
-          ],
-          sections: [
-            {
-              title: "Active Maps",
-              body: [
-                "FCC Apartment, High Floor Office, House, Office, Restaurant, Village Island, and Western City are part of the Tower setup.",
-                "Map previews and multiserver entries are handled through the normal Tower map list."
-              ]
-            }
-          ]
-        },
-        teams: {
-          title: "TEAMS",
-          body: [
-            "Props and hunters play very differently, so the Tower integration keeps their cosmetic behavior separate."
-          ],
-          sections: [
-            {
-              title: "Props",
-              body: [
-                "Props spawn as their CGMT playermodel before disguising, then lose hats and wearable cosmetics once they become an actual prop.",
-                "Movement and collision are tuned so props feel smooth while still fitting through spaces that make sense for their size."
-              ]
-            },
-            {
-              title: "Hunters",
-              body: [
-                "Hunters use their CGMT playermodels, hats, weapons, and normal player presentation.",
-                "Missed shots can punish careless checking, so hunters need to search with a little patience."
-              ]
-            }
-          ]
-        },
-        milestones: {
-          title: "MILESTONES",
-          body: [
-            "Prop Hunt achievements track the big habits: surviving as a prop, killing props, changing disguises, and taunting.",
-            "Milestones are earned by playing the mode, not by buying them from stores."
-          ],
-          sections: [
-            {
-              title: "Achievement Examples",
-              body: [
-                "Survive as a prop, kill props as a hunter, become different props, and use taunts during rounds.",
-                "The server code decides the exact award thresholds."
-              ]
-            }
-          ]
-        },
-        "gmc-payout": {
-          title: "GMC PAYOUT",
-          body: [
-            "Prop Hunt pays GMC for round participation and performance, then returns players through the Tower flow when the game is done.",
-            "Hunters are rewarded for finding props. Props are rewarded for surviving and playing out the round."
-          ],
-          sections: [
-            {
-              title: "Payout Notes",
-              body: [
-                "Payout tuning lives in the gamemode integration.",
-                "The website only describes the flow so players know what to expect."
-              ]
-            }
+            "Props receive time to choose a disguise and hiding place before the hunters are released.",
+            "Props win if at least one survives. Hunters win by eliminating every prop."
           ]
         }
       }
@@ -404,91 +260,25 @@
       image: "images/gamemodes/jazztronauts_off.jpg",
       logo: "images/gamemodes/jazztronauts_logo.png",
       accent: "#7d6cff",
-      tagline: "Ride the trolley, steal props from strange maps, and get paid back at the bar.",
-      description: "Jazztronauts is the odd one out, and that is the charm. It is less of a quick match and more of a hangout expedition: players leave the bar, collect props and shards, finish cat missions, then bring the haul home.",
+      tagline: "Travel to maps and collect props.",
+      description: "Jazztronauts is an exploration gamemode about collecting props from other maps.",
       menu: [
         { title: "Overview", slug: "overview" },
-        { title: "The Bar", slug: "bar" },
-        { title: "Missions", slug: "missions" },
-        { title: "Milestones", slug: "milestones" },
-        { title: "GMC Payout", slug: "gmc-payout" }
+        { title: "Gameplay", slug: "gameplay" }
       ],
       pages: {
         overview: {
-          title: "RIDE THE TROLLEY",
+          title: "JAZZTRONAUTS",
           body: [
-            "Jazztronauts is part hangout, part prop robbery, and part strange little expedition machine.",
-            "Players gather in the bar, pick a map, ride the trolley out, collect props and shards, then return to cash out when the haul is worth bringing home.",
-            "Unlike the short round gamemodes, Jazztronauts is built to stay running. Players can join the bar, leave for missions, and return without needing a traditional match reset."
-          ],
-          info: [
-            "Players: Drop-in friendly",
-            "Style: Exploration and collection",
-            "Hub: jazz_bar",
-            "Goal: Grab props, shards, and mission rewards"
+            "Players travel from the bar to other maps and collect props.",
+            "Collected props are brought back to the bar and exchanged for money."
           ]
         },
-        bar: {
-          title: "THE BAR",
+        gameplay: {
+          title: "GAMEPLAY",
           body: [
-            "The bar is the center of Jazztronauts. It is where players regroup, choose maps, talk to cats, and cash out prop money.",
-            "If the multiserver board shows the bar as empty, nobody is currently hanging out there. If it shows players, the server is live and ready."
-          ],
-          sections: [
-            {
-              title: "Joining",
-              body: [
-                "Players join through the Tower port while the server is on jazz_bar.",
-                "If the server is away exploring another map, the board uses the exploring preview instead of pretending the bar is open."
-              ]
-            }
-          ]
-        },
-        missions: {
-          title: "MISSIONS",
-          body: [
-            "Cat missions give the group something more focused to chase than random prop collecting.",
-            "Mission progress feeds into achievements, with the main completion award tuned around finishing the full set of Jazztronauts missions."
-          ],
-          sections: [
-            {
-              title: "Shards",
-              body: [
-                "Shards are worth watching for during trips. They pay GMC when collected and count toward Jazztronauts achievements.",
-                "Shard awards are tuned lower than the mission cap so the achievements are realistic instead of endless busywork."
-              ]
-            }
-          ]
-        },
-        milestones: {
-          title: "MILESTONES",
-          body: [
-            "Jazztronauts milestones reward long-term collecting and mission progress.",
-            "The trolley pet is the standout reward: a tiny flying trolley styled after the Jazztronauts bus."
-          ],
-          sections: [
-            {
-              title: "Rewards",
-              body: [
-                "The trolley pet is attached to one of the harder Jazztronauts achievements.",
-                "Jazz cat playermodel rewards."
-              ]
-            }
-          ]
-        },
-        "gmc-payout": {
-          title: "GMC PAYOUT",
-          body: [
-            "Jazztronauts pays GMC only when the gamemode itself pays its own currency or reward moments.",
-            "That means prop lever cashouts, shard pickups, and mission completion are the important payout points."
-          ],
-          sections: [
-            {
-              title: "Payout Notes",
-              body: [
-                "The GMC amount is matched to the in-gamemode reward moment instead of constantly dripping money in the background."
-              ]
-            }
+            "Players explore maps, collect props and shards, and complete missions.",
+            "The trolley returns the group to the bar."
           ]
         }
       }

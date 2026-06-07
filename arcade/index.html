@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>CGMT Arcade</title>
-	<link rel="stylesheet" href="arcade.css?v=5">
+	<link rel="stylesheet" href="arcade.css?v=7">
 	<script>
 		window.RufflePlayer = window.RufflePlayer || {};
 		window.RufflePlayer.config = {
@@ -18,10 +18,11 @@
 			scale: "showAll",
 			forceScale: true,
 			forceAlign: true,
+			preferredRenderer: "canvas",
 			quality: "high"
 		};
 	</script>
-	<script src="games.js?v=5"></script>
+	<script src="games.js?v=7"></script>
 	<script src="ruffle/ruffle.js"></script>
 </head>
 <body>
@@ -52,6 +53,8 @@
 			var games = window.CGMT_ARCADE_GAMES || [];
 			var params = new URLSearchParams(window.location.search);
 			var requested = (params.get("game") || params.get("flash") || "").toLowerCase();
+			var forcedWidth = Number(params.get("viewport_w"));
+			var forcedHeight = Number(params.get("viewport_h"));
 			var message = document.getElementById("message");
 			var title = document.getElementById("message-title");
 			var text = document.getElementById("message-text");
@@ -64,8 +67,36 @@
 			var volumeLabel = document.getElementById("volume-label");
 			var muteToggle = document.getElementById("mute-toggle");
 			var activePlayer = null;
+			var activeSizer = null;
+			var startupSizer = null;
 			var savedVolume = Number(localStorage.getItem("cgmtArcadeVolume"));
 			var isMuted = localStorage.getItem("cgmtArcadeMuted") === "true";
+
+			function setForcedViewport(width, height) {
+				width = Number(width);
+				height = Number(height);
+
+				if (Number.isFinite(width) && width > 0) {
+					forcedWidth = Math.floor(width);
+					document.documentElement.style.width = forcedWidth + "px";
+					document.body.style.width = forcedWidth + "px";
+					host.style.width = forcedWidth + "px";
+				}
+
+				if (Number.isFinite(height) && height > 0) {
+					forcedHeight = Math.floor(height);
+					document.documentElement.style.height = forcedHeight + "px";
+					document.body.style.height = forcedHeight + "px";
+					host.style.height = forcedHeight + "px";
+				}
+
+				if (activeSizer) {
+					activeSizer();
+				}
+			}
+
+			window.CGMTSetArcadeViewport = setForcedViewport;
+			setForcedViewport(forcedWidth, forcedHeight);
 
 			if (!Number.isFinite(savedVolume)) {
 				savedVolume = 100;
@@ -154,17 +185,47 @@
 					document.title = game.name + " - CGMT Arcade";
 
 					function sizePlayer() {
-						var width = Math.max(1, host.clientWidth || window.innerWidth);
-						var height = Math.max(1, host.clientHeight || window.innerHeight);
+						var width = Math.max(1, forcedWidth || host.clientWidth || document.documentElement.clientWidth || window.innerWidth);
+						var height = Math.max(1, forcedHeight || host.clientHeight || document.documentElement.clientHeight || window.innerHeight);
+						var widthValue = width + "px";
+						var heightValue = height + "px";
 
+						host.style.setProperty("width", widthValue, "important");
+						host.style.setProperty("height", heightValue, "important");
 						player.setAttribute("width", String(width));
 						player.setAttribute("height", String(height));
-						player.style.width = width + "px";
-						player.style.height = height + "px";
+						player.width = width;
+						player.height = height;
+						player.style.setProperty("width", widthValue, "important");
+						player.style.setProperty("height", heightValue, "important");
+
+						if (player.shadowRoot) {
+							var container = player.shadowRoot.querySelector(".container");
+							var canvas = player.shadowRoot.querySelector("canvas");
+
+							if (container) {
+								container.style.setProperty("width", widthValue, "important");
+								container.style.setProperty("height", heightValue, "important");
+							}
+
+							if (canvas) {
+								canvas.style.setProperty("width", widthValue, "important");
+								canvas.style.setProperty("height", heightValue, "important");
+							}
+						}
 					}
 
+					activeSizer = sizePlayer;
 					sizePlayer();
 					window.addEventListener("resize", sizePlayer);
+					setTimeout(sizePlayer, 100);
+					setTimeout(sizePlayer, 500);
+					setTimeout(sizePlayer, 1500);
+					startupSizer = setInterval(sizePlayer, 250);
+					setTimeout(function () {
+						clearInterval(startupSizer);
+						startupSizer = null;
+					}, 10000);
 
 					var loadOptions = {
 						url: swfPath,
@@ -172,14 +233,18 @@
 						allowScriptAccess: false,
 						scale: "showAll",
 						forceScale: true,
-						forceAlign: true
+						forceAlign: true,
+						preferredRenderer: "canvas"
 					};
 
 					if (game.base) {
 						loadOptions.base = game.base;
 					}
 
-					return player.ruffle().load(loadOptions);
+					return player.ruffle().load(loadOptions).then(function () {
+						sizePlayer();
+						requestAnimationFrame(sizePlayer);
+					});
 				}).then(function () {
 					applyVolume();
 					message.hidden = true;

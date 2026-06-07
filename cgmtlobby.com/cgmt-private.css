@@ -3,6 +3,12 @@
   --cgmt-panel: rgba(8, 11, 19, 0.82);
 }
 
+.cgmt-private-site .features-grid {
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
 .cgmt-private-badge {
   display: inline-flex;
   align-items: center;

@@ -9,7 +9,6 @@ window.CGMT_ARCADE_GAMES = [
 	{ name: "The Game", slug: "thegame", file: "thegame.swf", category: "standard" },
 	{ name: "Dino Run", slug: "dinorun", file: "dinorun.swf", category: "standard" },
 	{ name: "Morning Star", slug: "morningstar", file: "morningstar.swf", category: "standard" },
-	{ name: "Mirrors Edge 2D", slug: "mirrorsedge2d", path: "mirrorsedge/Frame/frame19.swf", category: "standard" },
 	{ name: "The Last Stand", slug: "thelaststand", file: "thelaststand.swf", category: "standard" },
 	{ name: "Super Karoshi", slug: "superkaroshi", file: "superkaroshi.swf", category: "standard" },
 	{ name: "n", slug: "ngame", file: "ngame.swf", category: "standard" },

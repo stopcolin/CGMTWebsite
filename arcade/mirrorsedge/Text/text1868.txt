@@ -1,1 +1,0 @@
-﻿<p align="center"><font face="Comic Sans MS Bold" size="24" color="#ed0000" letterSpacing="0.000000" kerning="1"><i>Congratulations!</i></font></p><p align="center"><font face="Comic Sans MS Bold" size="24" color="#ed0000" letterSpacing="0.000000" kerning="1"><i>You beat the challenge score!</i></font></p>
