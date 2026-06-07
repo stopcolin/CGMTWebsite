@@ -16,6 +16,8 @@
 			warnOnUnsupportedContent: true,
 			allowScriptAccess: false,
 			scale: "showAll",
+			forceScale: true,
+			forceAlign: true,
 			quality: "high"
 		};
 	</script>
@@ -96,7 +98,10 @@
 					return player.ruffle().load({
 						url: swfPath,
 						autoplay: "on",
-						allowScriptAccess: false
+						allowScriptAccess: false,
+						scale: "showAll",
+						forceScale: true,
+						forceAlign: true
 					});
 				}).then(function () {
 					message.hidden = true;
