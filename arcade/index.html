@@ -27,6 +27,15 @@
 <body>
 	<main id="player-host" aria-label="Arcade game"></main>
 
+	<div id="audio-controls" class="audio-controls">
+		<button id="audio-toggle" type="button" aria-expanded="false">Audio</button>
+		<div id="audio-panel" class="audio-panel" hidden>
+			<label for="volume-slider">Volume <span id="volume-label">100%</span></label>
+			<input id="volume-slider" type="range" min="0" max="100" step="1" value="100">
+			<button id="mute-toggle" type="button">Mute</button>
+		</div>
+	</div>
+
 	<section id="message" class="message">
 		<div class="message-card">
 			<h1 id="message-title">Loading arcade...</h1>
@@ -49,6 +58,53 @@
 			var expectedFile = document.getElementById("expected-file");
 			var catalog = document.getElementById("catalog");
 			var host = document.getElementById("player-host");
+			var audioToggle = document.getElementById("audio-toggle");
+			var audioPanel = document.getElementById("audio-panel");
+			var volumeSlider = document.getElementById("volume-slider");
+			var volumeLabel = document.getElementById("volume-label");
+			var muteToggle = document.getElementById("mute-toggle");
+			var activePlayer = null;
+			var savedVolume = Number(localStorage.getItem("cgmtArcadeVolume"));
+			var isMuted = localStorage.getItem("cgmtArcadeMuted") === "true";
+
+			if (!Number.isFinite(savedVolume)) {
+				savedVolume = 100;
+			}
+
+			savedVolume = Math.max(0, Math.min(100, savedVolume));
+
+			function applyVolume() {
+				var effectiveVolume = isMuted ? 0 : savedVolume / 100;
+
+				volumeSlider.value = String(savedVolume);
+				volumeLabel.textContent = savedVolume + "%";
+				muteToggle.textContent = isMuted ? "Unmute" : "Mute";
+
+				if (activePlayer) {
+					activePlayer.ruffle().volume = effectiveVolume;
+				}
+			}
+
+			audioToggle.addEventListener("click", function () {
+				audioPanel.hidden = !audioPanel.hidden;
+				audioToggle.setAttribute("aria-expanded", String(!audioPanel.hidden));
+			});
+
+			volumeSlider.addEventListener("input", function () {
+				savedVolume = Number(volumeSlider.value);
+				isMuted = false;
+				localStorage.setItem("cgmtArcadeVolume", String(savedVolume));
+				localStorage.setItem("cgmtArcadeMuted", "false");
+				applyVolume();
+			});
+
+			muteToggle.addEventListener("click", function () {
+				isMuted = !isMuted;
+				localStorage.setItem("cgmtArcadeMuted", String(isMuted));
+				applyVolume();
+			});
+
+			applyVolume();
 
 			function normalize(value) {
 				return String(value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -93,6 +149,8 @@
 					var player = ruffle.createPlayer();
 					player.id = "ruffle-player";
 					host.appendChild(player);
+					activePlayer = player;
+					applyVolume();
 					document.title = game.name + " - CGMT Arcade";
 
 					return player.ruffle().load({
@@ -104,6 +162,7 @@
 						forceAlign: true
 					});
 				}).then(function () {
+					applyVolume();
 					message.hidden = true;
 				}).catch(function (error) {
 					console.error(error);

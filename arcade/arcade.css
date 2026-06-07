@@ -37,6 +37,57 @@ ruffle-player {
 	height: 100%;
 }
 
+.audio-controls {
+	position: fixed;
+	top: 12px;
+	right: 12px;
+	z-index: 20;
+	display: flex;
+	align-items: flex-start;
+	gap: 6px;
+}
+
+.audio-controls button,
+.audio-panel {
+	border: 1px solid #3c5367;
+	border-radius: 4px;
+	background: rgba(10, 18, 26, 0.94);
+	color: #f3f6fa;
+}
+
+.audio-controls button {
+	min-height: 34px;
+	padding: 7px 12px;
+	cursor: pointer;
+}
+
+.audio-controls button:hover {
+	border-color: #55bde8;
+	background: #162431;
+}
+
+.audio-panel {
+	display: grid;
+	grid-template-columns: minmax(160px, 230px) auto;
+	gap: 8px 10px;
+	align-items: center;
+	padding: 10px;
+}
+
+.audio-panel[hidden] {
+	display: none;
+}
+
+.audio-panel label {
+	grid-column: 1 / -1;
+	color: #dceaf5;
+	font-size: 13px;
+}
+
+.audio-panel input {
+	width: 100%;
+}
+
 .message {
 	position: fixed;
 	inset: 0;
