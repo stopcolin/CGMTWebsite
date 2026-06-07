@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CGMT Arcade</title>
+	<link rel="stylesheet" href="arcade.css">
+	<script>
+		window.RufflePlayer = window.RufflePlayer || {};
+		window.RufflePlayer.config = {
+			autoplay: "on",
+			unmuteOverlay: "hidden",
+			letterbox: "on",
+			contextMenu: "off",
+			splashScreen: false,
+			warnOnUnsupportedContent: true,
+			allowScriptAccess: false,
+			scale: "showAll",
+			quality: "high"
+		};
+	</script>
+	<script src="games.js"></script>
+	<script src="ruffle/ruffle.js"></script>
+</head>
+<body>
+	<main id="player-host" aria-label="Arcade game"></main>
+
+	<section id="message" class="message">
+		<div class="message-card">
+			<h1 id="message-title">Loading arcade...</h1>
+			<p id="message-text">Preparing Ruffle.</p>
+			<code id="expected-file" hidden></code>
+			<div id="catalog" hidden></div>
+		</div>
+	</section>
+
+	<script>
+		(function () {
+			"use strict";
+
+			var games = window.CGMT_ARCADE_GAMES || [];
+			var params = new URLSearchParams(window.location.search);
+			var requested = (params.get("game") || params.get("flash") || "").toLowerCase();
+			var message = document.getElementById("message");
+			var title = document.getElementById("message-title");
+			var text = document.getElementById("message-text");
+			var expectedFile = document.getElementById("expected-file");
+			var catalog = document.getElementById("catalog");
+			var host = document.getElementById("player-host");
+
+			function normalize(value) {
+				return String(value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+			}
+
+			function showMessage(heading, body, file) {
+				title.textContent = heading;
+				text.textContent = body;
+				expectedFile.hidden = !file;
+				expectedFile.textContent = file || "";
+				message.hidden = false;
+			}
+
+			function showCatalog() {
+				showMessage("CGMT Arcade", "Choose a configured cabinet game.");
+				catalog.hidden = false;
+
+				games.forEach(function (game) {
+					var link = document.createElement("a");
+					link.href = "?game=" + encodeURIComponent(game.slug);
+					link.textContent = game.name;
+					catalog.appendChild(link);
+				});
+			}
+
+			function findGame(value) {
+				var normalized = normalize(value);
+				return games.find(function (game) {
+					return normalize(game.slug) === normalized || normalize(game.name) === normalized;
+				});
+			}
+
+			function startGame(game) {
+				var swfPath = "games/" + game.file;
+
+				fetch(swfPath, { method: "HEAD", cache: "no-store" }).then(function (response) {
+					if (!response.ok) {
+						throw new Error("Missing SWF");
+					}
+
+					var ruffle = window.RufflePlayer.newest();
+					var player = ruffle.createPlayer();
+					player.id = "ruffle-player";
+					host.appendChild(player);
+					document.title = game.name + " - CGMT Arcade";
+
+					return player.ruffle().load({
+						url: swfPath,
+						autoplay: "on",
+						allowScriptAccess: false
+					});
+				}).then(function () {
+					message.hidden = true;
+				}).catch(function (error) {
+					console.error(error);
+					showMessage(
+						game.name + " is not installed",
+						"Add the game's SWF to the website at the path below, then publish the site again.",
+						"CGMTWebsite/arcade/" + swfPath
+					);
+				});
+			}
+
+			if (!requested) {
+				showCatalog();
+				return;
+			}
+
+			var game = findGame(requested);
+			if (!game) {
+				showMessage("Unknown arcade game", "No game in games.js matches: " + requested);
+				return;
+			}
+
+			startGame(game);
+		}());
+	</script>
+</body>
+</html>
