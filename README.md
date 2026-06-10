@@ -1,3 +1,3 @@
 # CGMT Website
-
-This is a static GitHub Pages version of the mirrored GMod Tower website.
+Mirrored
+https://stopcolin.github.io/CGMTWebsite/cgmtlobby.com/index.html
