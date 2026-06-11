@@ -107,8 +107,7 @@ window.CGMT_SITE_CONFIG = {
       image: "images/gamemodes/lobby_off.jpg",
       logo: "images/gamemodes/lobby_logo.png",
       accent: "#3f88c5",
-      tagline: "The Tower hub for stores, suites, theater, arcade, and every gamemode port.",
-      staticPage: true
+      tagline: "The Tower hub for stores, suites, theater, arcade, and every gamemode port."
     },
     {
       name: "Ball Race",
@@ -116,8 +115,7 @@ window.CGMT_SITE_CONFIG = {
       image: "images/gamemodes/ballrace_off.jpg",
       logo: "images/gamemodes/ballrace_logo.png",
       accent: "#58a6ff",
-      tagline: "Roll through bright obstacle courses and race for clean, fast finishes.",
-      staticPage: true
+      tagline: "Roll through bright obstacle courses and race for clean, fast finishes."
     },
     {
       name: "Virus",
@@ -125,8 +123,7 @@ window.CGMT_SITE_CONFIG = {
       image: "images/gamemodes/virus_off.jpg",
       logo: "images/gamemodes/virus_logo.png",
       accent: "#65c466",
-      tagline: "Survive the infection or spread it before the last player gets away.",
-      staticPage: true
+      tagline: "Survive the infection or spread it before the last player gets away."
     },
     {
       name: "PVP Battle",
@@ -134,14 +131,13 @@ window.CGMT_SITE_CONFIG = {
       image: "images/gamemodes/pvpbattle_off.jpg",
       logo: "images/gamemodes/pvpbattle_logo.png",
       accent: "#e56b4a",
-      tagline: "Arena combat, weapon pickups, and fast fights for players who want the direct route.",
-      staticPage: true
+      tagline: "Arena combat, weapon pickups, and fast fights for players who want the direct route."
     },
     {
       name: "Ultimate Chimera Hunt",
       slug: "uch",
       image: "images/gamemodes/uch_off.jpg",
-      logo: "",
+      logo: "images/gamemodes/uch_logo.png",
       accent: "#d64a64",
       tagline: "A cat-and-mouse chase where one wrong turn can end the round.",
       description: "Ultimate Chimera Hunt is a frantic chase mode about pressure, panic, and timing. Players try to survive while the chimera stalks the map and looks for the opening that cracks the group.",
@@ -166,8 +162,7 @@ window.CGMT_SITE_CONFIG = {
       image: "images/gamemodes/zombiemassacre_off.jpg",
       logo: "images/gamemodes/zombiemassacre_logo.png",
       accent: "#7ac943",
-      tagline: "Team up, upgrade, and hold out against waves of zombies.",
-      staticPage: true
+      tagline: "Team up, upgrade, and hold out against waves of zombies."
     },
     {
       name: "Mini Golf",
@@ -175,26 +170,23 @@ window.CGMT_SITE_CONFIG = {
       image: "images/gamemodes/minigolf_off.jpg",
       logo: "images/gamemodes/minigolf_logo.png",
       accent: "#7ddf64",
-      tagline: "Pick a ball, line up the shot, and try not to donate strokes to the scenery.",
-      staticPage: true
+      tagline: "Pick a ball, line up the shot, and try not to donate strokes to the scenery."
     },
     {
       name: "Source Karts",
       slug: "sourcekarts",
       image: "images/gamemodes/sourcekarts_off.jpg",
-      logo: "",
+      logo: "images/gamemodes/sourcekarts_logo.png",
       accent: "#ffb84d",
-      tagline: "Kart racing with items, bad timing, and just enough chaos to blame the track.",
-      staticPage: true
+      tagline: "Kart racing with items, bad timing, and just enough chaos to blame the track."
     },
     {
       name: "Gourmet Race",
       slug: "gourmetrace",
       image: "images/gamemodes/gourmetrace_off.jpg",
-      logo: "",
+      logo: "images/gamemodes/gourmetrace_logo.png",
       accent: "#f39c4a",
-      tagline: "Race through food-themed tracks and try to finish before the course eats your lead.",
-      staticPage: true
+      tagline: "Race through food-themed tracks and try to finish before the course eats your lead."
     },
     {
       name: "Slashers",

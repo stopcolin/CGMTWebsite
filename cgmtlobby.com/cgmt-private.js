@@ -6,6 +6,7 @@
   var shortName = config.shortName || siteName;
   var description = config.description || "";
   var nav = config.navigation || {};
+  var gamemodeContentLoading = false;
 
   function siteRoot() {
     var script = Array.prototype.find.call(document.scripts, function (item) {
@@ -382,6 +383,21 @@
     });
   }
 
+  function mergeEditableGamemodeContent() {
+    var content = window.CGMT_GAMEMODE_CONTENT || {};
+
+    Object.keys(content).forEach(function (slug) {
+      var mode = gamemodeBySlug(slug);
+      if (!mode) return;
+
+      Object.keys(content[slug]).forEach(function (key) {
+        mode[key] = content[slug][key];
+      });
+
+      delete mode.staticPage;
+    });
+  }
+
   function renderGamemodeIndex() {
     var list = document.querySelector(".gamemodes-list");
     if (!list || !Array.isArray(config.gamemodes)) return;
@@ -433,6 +449,8 @@
   }
 
   function classicGamemodeLink(mode, entry) {
+    if (entry.href) return entry.href;
+
     var slug = locationSlug(entry.slug || entry.title);
     return mode.slug + ".html?location=" + encodeURIComponent(slug);
   }
@@ -500,7 +518,18 @@
       };
     });
     var pages = mode.pages || {};
-    var activePage = pages[route.location] || pages.overview || fallbackGamemodePage(mode);
+    var activeLocation = pages[route.location]
+      ? route.location
+      : (mode.defaultPage || (pages.overview ? "overview" : route.location));
+    var activePage = pages[activeLocation] || pages.overview || fallbackGamemodePage(mode);
+    var mainContent = activePage.html != null
+      ? activePage.html
+      : [
+        '<div class="lobby-content cgmt-classic-gamemode-content"' + cid + ">",
+        '<h2' + cid + ">" + escapeHtml(activePage.title || mode.name) + "</h2>",
+        renderClassicBody(activePage, cid),
+        "</div>"
+      ].join("");
 
     page.setAttribute("data-gamemode", mode.slug);
     page.style.setProperty("--mode-accent", mode.accent || "#66d9ef");
@@ -516,14 +545,12 @@
       '<div class="sidebar"' + cid + '><div class="menu-section"' + cid + "><h2" + cid + ">INFORMATION</h2><ul" + cid + ">",
       menu.map(function (entry) {
         var entrySlug = locationSlug(entry.slug || entry.title);
-        var activeClass = entrySlug === route.location ? ' class="active"' : " class";
+        var isActive = !entry.href && (entrySlug === activeLocation || activeLocation.indexOf(entrySlug + "-") === 0);
+        var activeClass = isActive ? ' class="active"' : " class";
         return '<li' + cid + '><a href="' + escapeHtml(classicGamemodeLink(mode, entry)) + '"' + activeClass + cid + "> " + escapeHtml(entry.title) + " </a></li>";
       }).join(""),
       "</ul></div></div>",
-      '<div class="main-content"' + cid + '><div class="lobby-content cgmt-classic-gamemode-content"' + cid + ">",
-      '<h2' + cid + ">" + escapeHtml(activePage.title || mode.name) + "</h2>",
-      renderClassicBody(activePage, cid),
-      "</div></div>",
+      '<div class="main-content"' + cid + ">" + mainContent + "</div>",
       "</div>"
     ].join("");
   }
@@ -569,6 +596,7 @@
   }
 
   function boot() {
+    mergeEditableGamemodeContent();
     removeDownloadedAnalytics();
     updateAssets();
     updateBranding();
@@ -582,11 +610,33 @@
     renderDisabledPage();
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot);
-  } else {
-    boot();
+  function start() {
+    if (!document.querySelector(".gamemode-page") || window.CGMT_GAMEMODE_CONTENT) {
+      boot();
+      return;
+    }
+
+    if (gamemodeContentLoading) return;
+    gamemodeContentLoading = true;
+
+    var script = document.createElement("script");
+    script.src = asset("cgmt-gamemodes.js");
+    script.onload = function () {
+      gamemodeContentLoading = false;
+      boot();
+    };
+    script.onerror = function () {
+      gamemodeContentLoading = false;
+      boot();
+    };
+    document.head.appendChild(script);
   }
 
-  document.addEventListener("astro:page-load", boot);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
+  } else {
+    start();
+  }
+
+  document.addEventListener("astro:page-load", start);
 })();
