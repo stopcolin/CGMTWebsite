@@ -141,20 +141,24 @@ window.CGMT_SITE_CONFIG = {
       accent: "#d64a64",
       tagline: "A cat-and-mouse chase where one wrong turn can end the round.",
       description: "Ultimate Chimera Hunt is a frantic chase mode about pressure, panic, and timing. Players try to survive while the chimera stalks the map and looks for the opening that cracks the group.",
-      sections: [
-        {
-          title: "Overview",
+      menu: [
+        { title: "Overview", slug: "overview" },
+        { title: "Good To Know", slug: "good-to-know" }
+      ],
+      pages: {
+        overview: {
+          title: "ULTIMATE CHIMERA HUNT",
           body: [
-            "WIP",
+            "Ultimate Chimera Hunt is a frantic chase mode about pressure, panic, and timing. Players try to survive while the chimera stalks the map and looks for the opening that cracks the group."
           ]
         },
-        {
-          title: "Good To Know",
+        "good-to-know": {
+          title: "GOOD TO KNOW",
           body: [
             "WIP"
           ]
         }
-      ]
+      }
     },
     {
       name: "Zombie Massacre",

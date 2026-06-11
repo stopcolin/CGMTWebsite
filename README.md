@@ -10,7 +10,7 @@ https://stopcolin.github.io/CGMTWebsite/cgmtlobby.com/index.html
 - Each gamemode has an editable `menu` and `pages` section. Page content is
   stored as normal HTML so the original layouts, images, and item lists remain
   intact.
-- Edit Slashers, Prop Hunt, Jazztronauts, and the gamemode list itself in
+- Edit Ultimate Chimera Hunt, Slashers, Prop Hunt, Jazztronauts, and the gamemode list itself in
   `cgmtlobby.com/cgmt-config.js`.
 - The downloaded HTML pages in `cgmtlobby.com/gamemodes` are retained as
   backups. Running `node tools/extract-gamemode-content.js` rebuilds
