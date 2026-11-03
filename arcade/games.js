@@ -1,0 +1,20 @@
+window.CGMT_ARCADE_GAMES = [
+	{ name: "Patapon", slug: "patapon", file: "patapon.swf", category: "standard" },
+	{ name: "Fancy Pants", slug: "the_fancy_pants_adventures", file: "the_fancy_pants_adventures.swf", category: "standard" },
+	{ name: "Go Go Happy Smile", slug: "gogohappysmile", file: "gogohappysmile.swf", category: "standard" },
+	{ name: "Neverending Light", slug: "neverendinglight", file: "neverendinglight.swf", category: "standard" },
+	{ name: "Super Mario 63", slug: "supermario63", file: "supermario63.swf", category: "standard" },
+	{ name: "Shift", slug: "shift", file: "shift.swf", category: "standard" },
+	{ name: "Portal", slug: "portal", file: "portal.swf", category: "standard" },
+	{ name: "The Game", slug: "thegame", file: "thegame.swf", category: "standard" },
+	{ name: "Dino Run", slug: "dinorun", file: "dinorun.swf", category: "standard" },
+	{ name: "Morning Star", slug: "morningstar", file: "morningstar.swf", category: "standard" },
+	{ name: "The Last Stand", slug: "thelaststand", file: "thelaststand.swf", category: "standard" },
+	{ name: "Super Karoshi", slug: "superkaroshi", file: "superkaroshi.swf", category: "standard" },
+	{ name: "n", slug: "ngame", file: "ngame.swf", category: "standard" },
+	{ name: "Sprite Smash", slug: "spritesmash", file: "spritesmash.swf", category: "standard" },
+	{ name: "Heavy Weapons", slug: "heavyweapons", file: "heavyweapons.swf", category: "standard" },
+	{ name: "Metal Slug", slug: "metalslug", file: "metalslug.swf", category: "standard" },
+	{ name: "flow", slug: "flow", file: "flow.swf", category: "standard" },
+	{ name: "Alien Hominid", slug: "alienhominid", file: "alienhominid.swf", category: "standard" }
+];

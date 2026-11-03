@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CGMT Arcade</title>
+	<link rel="stylesheet" href="arcade.css?v=7">
+	<script>
+		window.RufflePlayer = window.RufflePlayer || {};
+		window.RufflePlayer.config = {
+			autoplay: "on",
+			unmuteOverlay: "hidden",
+			letterbox: "on",
+			contextMenu: "off",
+			splashScreen: false,
+			warnOnUnsupportedContent: true,
+			allowScriptAccess: false,
+			scale: "showAll",
+			forceScale: true,
+			forceAlign: true,
+			preferredRenderer: "canvas",
+			quality: "high"
+		};
+	</script>
+	<script src="games.js?v=7"></script>
+	<script src="ruffle/ruffle.js"></script>
+</head>
+<body>
+	<main id="player-host" aria-label="Arcade game"></main>
+
+	<div id="audio-controls" class="audio-controls" style="position:fixed;top:12px;right:12px;z-index:2147483647;">
+		<button id="audio-toggle" type="button" aria-expanded="false">Audio</button>
+		<div id="audio-panel" class="audio-panel" hidden>
+			<label for="volume-slider">Volume <span id="volume-label">100%</span></label>
+			<input id="volume-slider" type="range" min="0" max="100" step="1" value="100">
+			<button id="mute-toggle" type="button">Mute</button>
+		</div>
+	</div>
+
+	<section id="message" class="message">
+		<div class="message-card">
+			<h1 id="message-title">Loading arcade...</h1>
+			<p id="message-text">Preparing Ruffle.</p>
+			<code id="expected-file" hidden></code>
+			<div id="catalog" hidden></div>
+		</div>
+	</section>
+
+	<script>
+		(function () {
+			"use strict";
+
+			var games = window.CGMT_ARCADE_GAMES || [];
+			var params = new URLSearchParams(window.location.search);
+			var requested = (params.get("game") || params.get("flash") || "").toLowerCase();
+			var forcedWidth = Number(params.get("viewport_w"));
+			var forcedHeight = Number(params.get("viewport_h"));
+			var message = document.getElementById("message");
+			var title = document.getElementById("message-title");
+			var text = document.getElementById("message-text");
+			var expectedFile = document.getElementById("expected-file");
+			var catalog = document.getElementById("catalog");
+			var host = document.getElementById("player-host");
+			var audioToggle = document.getElementById("audio-toggle");
+			var audioPanel = document.getElementById("audio-panel");
+			var volumeSlider = document.getElementById("volume-slider");
+			var volumeLabel = document.getElementById("volume-label");
+			var muteToggle = document.getElementById("mute-toggle");
+			var activePlayer = null;
+			var activeSizer = null;
+			var startupSizer = null;
+			var savedVolume = Number(localStorage.getItem("cgmtArcadeVolume"));
+			var isMuted = localStorage.getItem("cgmtArcadeMuted") === "true";
+
+			function setForcedViewport(width, height) {
+				width = Number(width);
+				height = Number(height);
+
+				if (Number.isFinite(width) && width > 0) {
+					forcedWidth = Math.floor(width);
+					document.documentElement.style.width = forcedWidth + "px";
+					document.body.style.width = forcedWidth + "px";
+					host.style.width = forcedWidth + "px";
+				}
+
+				if (Number.isFinite(height) && height > 0) {
+					forcedHeight = Math.floor(height);
+					document.documentElement.style.height = forcedHeight + "px";
+					document.body.style.height = forcedHeight + "px";
+					host.style.height = forcedHeight + "px";
+				}
+
+				if (activeSizer) {
+					activeSizer();
+				}
+			}
+
+			window.CGMTSetArcadeViewport = setForcedViewport;
+			setForcedViewport(forcedWidth, forcedHeight);
+
+			if (!Number.isFinite(savedVolume)) {
+				savedVolume = 100;
+			}
+
+			savedVolume = Math.max(0, Math.min(100, savedVolume));
+
+			function applyVolume() {
+				var effectiveVolume = isMuted ? 0 : savedVolume / 100;
+
+				volumeSlider.value = String(savedVolume);
+				volumeLabel.textContent = savedVolume + "%";
+				muteToggle.textContent = isMuted ? "Unmute" : "Mute";
+
+				if (activePlayer) {
+					activePlayer.ruffle().volume = effectiveVolume;
+				}
+			}
+
+			audioToggle.addEventListener("click", function () {
+				audioPanel.hidden = !audioPanel.hidden;
+				audioToggle.setAttribute("aria-expanded", String(!audioPanel.hidden));
+			});
+
+			volumeSlider.addEventListener("input", function () {
+				savedVolume = Number(volumeSlider.value);
+				isMuted = false;
+				localStorage.setItem("cgmtArcadeVolume", String(savedVolume));
+				localStorage.setItem("cgmtArcadeMuted", "false");
+				applyVolume();
+			});
+
+			muteToggle.addEventListener("click", function () {
+				isMuted = !isMuted;
+				localStorage.setItem("cgmtArcadeMuted", String(isMuted));
+				applyVolume();
+			});
+
+			applyVolume();
+
+			function normalize(value) {
+				return String(value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+			}
+
+			function showMessage(heading, body, file) {
+				title.textContent = heading;
+				text.textContent = body;
+				expectedFile.hidden = !file;
+				expectedFile.textContent = file || "";
+				message.hidden = false;
+			}
+
+			function showCatalog() {
+				showMessage("CGMT Arcade", "Choose a configured cabinet game.");
+				catalog.hidden = false;
+
+				games.forEach(function (game) {
+					var link = document.createElement("a");
+					link.href = "?game=" + encodeURIComponent(game.slug);
+					link.textContent = game.name;
+					catalog.appendChild(link);
+				});
+			}
+
+			function findGame(value) {
+				var normalized = normalize(value);
+				return games.find(function (game) {
+					return normalize(game.slug) === normalized || normalize(game.name) === normalized;
+				});
+			}
+
+			function startGame(game) {
+				var swfPath = game.path || ("games/" + game.file);
+
+				fetch(swfPath, { method: "HEAD", cache: "no-store" }).then(function (response) {
+					if (!response.ok) {
+						throw new Error("Missing SWF");
+					}
+
+					var ruffle = window.RufflePlayer.newest();
+					var player = ruffle.createPlayer();
+					player.id = "ruffle-player";
+					host.appendChild(player);
+					activePlayer = player;
+					applyVolume();
+					document.title = game.name + " - CGMT Arcade";
+
+					function sizePlayer() {
+						var width = Math.max(1, forcedWidth || host.clientWidth || document.documentElement.clientWidth || window.innerWidth);
+						var height = Math.max(1, forcedHeight || host.clientHeight || document.documentElement.clientHeight || window.innerHeight);
+						var widthValue = width + "px";
+						var heightValue = height + "px";
+
+						host.style.setProperty("width", widthValue, "important");
+						host.style.setProperty("height", heightValue, "important");
+						player.setAttribute("width", String(width));
+						player.setAttribute("height", String(height));
+						player.width = width;
+						player.height = height;
+						player.style.setProperty("width", widthValue, "important");
+						player.style.setProperty("height", heightValue, "important");
+
+						if (player.shadowRoot) {
+							var container = player.shadowRoot.querySelector(".container");
+							var canvas = player.shadowRoot.querySelector("canvas");
+
+							if (container) {
+								container.style.setProperty("width", widthValue, "important");
+								container.style.setProperty("height", heightValue, "important");
+							}
+
+							if (canvas) {
+								canvas.style.setProperty("width", widthValue, "important");
+								canvas.style.setProperty("height", heightValue, "important");
+							}
+						}
+					}
+
+					activeSizer = sizePlayer;
+					sizePlayer();
+					window.addEventListener("resize", sizePlayer);
+					setTimeout(sizePlayer, 100);
+					setTimeout(sizePlayer, 500);
+					setTimeout(sizePlayer, 1500);
+					startupSizer = setInterval(sizePlayer, 250);
+					setTimeout(function () {
+						clearInterval(startupSizer);
+						startupSizer = null;
+					}, 10000);
+
+					var loadOptions = {
+						url: swfPath,
+						autoplay: "on",
+						allowScriptAccess: false,
+						scale: "showAll",
+						forceScale: true,
+						forceAlign: true,
+						preferredRenderer: "canvas"
+					};
+
+					if (game.base) {
+						loadOptions.base = game.base;
+					}
+
+					return player.ruffle().load(loadOptions).then(function () {
+						sizePlayer();
+						requestAnimationFrame(sizePlayer);
+					});
+				}).then(function () {
+					applyVolume();
+					message.hidden = true;
+				}).catch(function (error) {
+					console.error(error);
+					showMessage(
+						game.name + " is not installed",
+						"Add the game's SWF to the website at the path below, then publish the site again.",
+						"CGMTWebsite/arcade/" + swfPath
+					);
+				});
+			}
+
+			if (!requested) {
+				showCatalog();
+				return;
+			}
+
+			var game = findGame(requested);
+			if (!game) {
+				showMessage("Unknown arcade game", "No game in games.js matches: " + requested);
+				return;
+			}
+
+			startGame(game);
+		}());
+	</script>
+</body>
+</html>
