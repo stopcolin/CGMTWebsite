@@ -592,7 +592,7 @@ window.CGMT_GAMEMODES = [
 ],
   },
   {
-    name: "CSS Zombies",
+    name: "Counter Strike: Source Zombies",
     banner: "assets/gamemodes/csszombiesbanner.png",
     description: "Counter Strike: Source Zombies is a server side modification for Counter-Strike Source. The aim of the game is to conquer the attacking zombies or kill all humans depending on what side of the field you currently are.",
     payout: "500 GMC per round; +500 for a first-infected win, +225 for an infected win, +500 for human survival or last-human, +225 per infection and +5 per zombie kill.",
