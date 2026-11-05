@@ -5,6 +5,21 @@
   var modeCount = document.getElementById("mode-count");
   var newsGrid = document.getElementById("news-grid");
   var games = Array.isArray(window.CGMT_GAMEMODES) ? window.CGMT_GAMEMODES : [];
+  var heroArt = document.querySelector(".hero-art");
+  var heroBanner = document.querySelector(".hero-banner");
+  var heroArtLabel = document.querySelector(".hero-art-label");
+
+  var featuredGames = games.filter(function (game) {
+    return game && typeof game.name === "string" && typeof game.banner === "string";
+  });
+
+  if (featuredGames.length && heroArt && heroBanner && heroArtLabel) {
+    var featuredGame = featuredGames[Math.floor(Math.random() * featuredGames.length)];
+    heroBanner.src = featuredGame.banner;
+    heroBanner.alt = featuredGame.name + " banner";
+    heroArtLabel.textContent = featuredGame.name;
+    heroArt.setAttribute("aria-label", "Browse " + featuredGame.name + " and GMod Tower gamemodes");
+  }
 
   function element(tag, className, text) {
     var node = document.createElement(tag);
